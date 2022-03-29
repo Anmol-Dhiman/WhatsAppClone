@@ -16,4 +16,5 @@
     <color name="chatBackground">#AAAAAA</color>
 
     <color name="lightgreen">#B2F8CD</color>
+    <color name="aboutPhotoIcon">#BDBBBB</color>
 </resources>

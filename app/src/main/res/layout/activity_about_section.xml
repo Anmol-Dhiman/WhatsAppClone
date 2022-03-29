@@ -6,32 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".AboutSection">
 
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="70dp"
+        android:layout_height="67dp"
+        android:background="@drawable/about_photo"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/about"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_photo_camera_24" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo"
+        tools:ignore="ImageContrastCheck" />
 
     <EditText
         android:id="@+id/about"
-        android:layout_width="wrap_content"
+        android:layout_width="269dp"
         android:layout_height="50dp"
-        android:layout_marginTop="160dp"
-        android:layout_weight="1.5"
-        android:background="@drawable/chat_edit_text"
+        android:layout_marginTop="274dp"
+        android:layout_marginBottom="196dp"
         android:ems="10"
-        android:hint="About"
+        android:hint="about"
         android:inputType="textPersonName"
+        android:maxLength="15"
+        app:layout_constraintBottom_toTopOf="@+id/next"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/profileImage"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/conformationFab"
+    <Button
+        android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        app:backgroundTint="@color/colorPrimary"
+        android:layout_marginBottom="35dp"
+        android:text="next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_baseline_done_24" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/about" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,12 @@ public class User {
         this.about = about;
     }
 
+    public User(String profliePic, String phoneNumber, String about) {
+        this.profliePic = profliePic;
+        this.phoneNumber = phoneNumber;
+        this.about = about;
+    }
+
     public String getLastMessage() {
         return lastMessage;
     }
