@@ -15,6 +15,7 @@ import com.example.whatsappclone.Adapters.UserAdapter;
 import com.example.whatsappclone.MainActivity;
 import com.example.whatsappclone.databinding.FragmentChatsBinding;
 import com.example.whatsappclone.model.User;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -28,10 +29,10 @@ public class ChatsFragment extends Fragment {
     private FragmentChatsBinding binding;
     private ArrayList<User> list = new ArrayList<>();
     private FirebaseDatabase database;
+    private FirebaseAuth auth;
 
 
-
-    public ChatsFragment( ) {
+    public ChatsFragment() {
 
     }
 
@@ -44,7 +45,7 @@ public class ChatsFragment extends Fragment {
 
         binding = FragmentChatsBinding.inflate(inflater, container, false);
         database = FirebaseDatabase.getInstance();
-
+        auth = FirebaseAuth.getInstance();
         UserAdapter adapter = new UserAdapter(list, getContext());
         binding.chatRecyclerView.setAdapter(adapter);
         binding.chatRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -64,8 +65,13 @@ public class ChatsFragment extends Fragment {
                     user.setUserId(dataSnapshot.getKey());
                     Log.d("data", dataSnapshot.getKey());
 
+                    if (user.getUserId().equals(auth.getUid())) {
+                        Log.d("userIdinchat", user.getUserId());
+                        Log.d("currentUserId", auth.getUid());
+                    } else {
+                        list.add(user);
 
-                    list.add(user);
+                    }
 
                 }
                 adapter.notifyDataSetChanged();
