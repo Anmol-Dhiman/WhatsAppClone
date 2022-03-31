@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.hbb20.CountryCodePicker;
 
 import java.util.concurrent.TimeUnit;
 
@@ -113,7 +114,7 @@ public class SignUp extends AppCompatActivity {
                 Toast.makeText(SignUp.this, "Otp sent successfully!!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignUp.this, OtpVerification.class);
                 intent.putExtra("verificationId", verificationId);
-                Log.d("otp","otp sent successfully");
+                Log.d("otp", "otp sent successfully");
                 intent.putExtra("phoneNumber", binding.phoneNumber.getText().toString().trim());
                 startActivity(intent);
             }
@@ -123,9 +124,10 @@ public class SignUp extends AppCompatActivity {
 //        all these code are help to send the otp to the user and after sending the otp we will look after the callBacks
 //for next step
 
+        Log.d("code", binding.ccp.getSelectedCountryCode());
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(auth)
-                        .setPhoneNumber("+91" + binding.phoneNumber.getText().toString().trim())       // Phone number to verify
+                        .setPhoneNumber("+" + binding.ccp.getSelectedCountryCode() + binding.phoneNumber.getText().toString().trim())       // Phone number to verify
                         .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
                         .setActivity(this)                 // Activity (for callback binding)
                         .setCallbacks(callBacks)          // OnVerificationStateChangedCallbacks
