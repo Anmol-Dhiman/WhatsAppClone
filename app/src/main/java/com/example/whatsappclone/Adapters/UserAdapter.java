@@ -50,7 +50,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         User user = list.get(position);
         holder.userName.setText(user.getPhoneNumber());
         holder.lastMessage.setText("temp");
-//        Picasso.get().load(user.getProfliePic()).placeholder(R.drawable.avatar).into(holder.proflieImg);
+        Picasso.get().load(user.getProfliePic()).placeholder(R.drawable.avatar).into(holder.proflieImg);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

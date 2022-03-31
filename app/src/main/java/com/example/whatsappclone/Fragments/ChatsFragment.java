@@ -65,13 +65,13 @@ public class ChatsFragment extends Fragment {
                     user.setUserId(dataSnapshot.getKey());
                     Log.d("data", dataSnapshot.getKey());
 
-                    if (user.getUserId().equals(auth.getUid())) {
-                        Log.d("userIdinchat", user.getUserId());
-                        Log.d("currentUserId", auth.getUid());
-                    } else {
+//                    if (user.getUserId().equals(auth.getUid())) {
+//                        Log.d("userIdinchat", user.getUserId());
+//                        Log.d("currentUserId", auth.getUid());
+//                    } else {
                         list.add(user);
 
-                    }
+//                    }
 
                 }
                 adapter.notifyDataSetChanged();

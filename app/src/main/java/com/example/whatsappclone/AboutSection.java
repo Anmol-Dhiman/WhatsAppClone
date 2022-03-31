@@ -81,7 +81,23 @@ public class AboutSection extends AppCompatActivity {
                                     public void onSuccess(Uri uri) {
 
                                         url = uri.toString();
-                                        Log.d("url",url);
+                                        if (binding.about.getText().toString().trim().isEmpty()) {
+                                            user = new User(url, phoneNumber, "Hey there I am using SherlockVARM's WhatsApp");
+                                        } else {
+                                            user = new User(url, phoneNumber, binding.about.getText().toString().trim());
+                                        }
+                                        Log.d("user", user.getProfliePic() + user.getPhoneNumber() + user.getAbout());
+                                        database.getReference().child("Users").child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+
+                                                Toast.makeText(AboutSection.this, "The User Hass been created", Toast.LENGTH_SHORT).show();
+
+
+                                            }
+                                        });
+
+                                        Log.d("url", url);
                                         Picasso.get().load(url).into(binding.profileImage);
                                     }
                                 });
@@ -114,21 +130,9 @@ public class AboutSection extends AppCompatActivity {
         binding.next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (binding.about.getText().toString().trim().isEmpty()) {
-                    user = new User(url, phoneNumber, "Hey there I am using SherlockVARM's WhatsApp");
-                } else {
-                    user = new User(url, phoneNumber, binding.about.getText().toString().trim());
-                }
-                database.getReference().child("Users").child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Intent intent = new Intent(AboutSection.this, MainActivity.class);
-                        intent.putExtra("id", id);
-                        Log.d("theIdOfSender", id);
-                        startActivity(intent);
-                    }
-                });
-
+                Intent intent = new Intent(AboutSection.this, MainActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
             }
         });
 
