@@ -1,29 +1,36 @@
-package com.example.whatsappclone;
+package com.example.whatsappclone.authenticatoin;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.whatsappclone.MainActivity;
 import com.example.whatsappclone.databinding.ActivityAboutSectionBinding;
 import com.example.whatsappclone.model.User;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import javax.security.auth.login.LoginException;
 
 public class AboutSection extends AppCompatActivity {
 
@@ -34,7 +41,7 @@ public class AboutSection extends AppCompatActivity {
     private User user;
     private String id;
     private FirebaseStorage storage;
-    private String url;
+    private String url = "noProflie";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,7 @@ public class AboutSection extends AppCompatActivity {
         setContentView(binding.getRoot());
         database = FirebaseDatabase.getInstance();
         storage = FirebaseStorage.getInstance();
+
 
         phoneNumber = getIntent().getStringExtra("phoneNumber");
         id = getIntent().getStringExtra("id");
@@ -81,24 +89,10 @@ public class AboutSection extends AppCompatActivity {
                                     public void onSuccess(Uri uri) {
 
                                         url = uri.toString();
-                                        if (binding.about.getText().toString().trim().isEmpty()) {
-                                            user = new User(url, phoneNumber, "Hey there I am using SherlockVARM's WhatsApp");
-                                        } else {
-                                            user = new User(url, phoneNumber, binding.about.getText().toString().trim());
-                                        }
-                                        Log.d("user", user.getProfliePic() + user.getPhoneNumber() + user.getAbout());
-                                        database.getReference().child("Users").child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
 
-                                                Toast.makeText(AboutSection.this, "The User Hass been created", Toast.LENGTH_SHORT).show();
-
-
-                                            }
-                                        });
 
                                         Log.d("url", url);
-                                        Picasso.get().load(url).into(binding.profileImage);
+
                                     }
                                 });
                             }
@@ -130,6 +124,27 @@ public class AboutSection extends AppCompatActivity {
         binding.next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                while (ContextCompat.checkSelfPermission(AboutSection.this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(AboutSection.this, new String[]{Manifest.permission.READ_CONTACTS}, 0);
+
+                }
+
+                if (binding.about.getText().toString().trim().isEmpty()) {
+                    user = new User(url, phoneNumber, "Hey there I am using SherlockVARM's WhatsApp");
+                } else {
+                    user = new User(url, phoneNumber, binding.about.getText().toString().trim());
+                }
+                Log.d("user", user.getProfliePic() + user.getPhoneNumber() + user.getAbout());
+                database.getReference().child("Users").child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+
+                        Toast.makeText(AboutSection.this, "The User Hass been created", Toast.LENGTH_SHORT).show();
+
+
+                    }
+                });
+
                 Intent intent = new Intent(AboutSection.this, MainActivity.class);
                 intent.putExtra("id", id);
                 startActivity(intent);

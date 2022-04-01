@@ -1,4 +1,4 @@
-package com.example.whatsappclone;
+package com.example.whatsappclone.authenticatoin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,8 +19,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
 
 public class OtpVerification extends AppCompatActivity {
 

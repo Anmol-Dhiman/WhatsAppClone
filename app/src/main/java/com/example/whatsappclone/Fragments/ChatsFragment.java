@@ -1,11 +1,15 @@
 package com.example.whatsappclone.Fragments;
 
+import android.annotation.SuppressLint;
+import android.content.ContentResolver;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -58,21 +62,19 @@ public class ChatsFragment extends Fragment {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                r0AvgZdbmCSUYjJAZo9XNFrQ5k93
+
                 list.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     User user = dataSnapshot.getValue(User.class);
                     user.setUserId(dataSnapshot.getKey());
                     Log.d("data", dataSnapshot.getKey());
 
-//                    if (user.getUserId().equals(auth.getUid())) {
-//                        Log.d("userIdinchat", user.getUserId());
-//                        Log.d("currentUserId", auth.getUid());
-//                    } else {
-                        list.add(user);
+                    if (user.getUserId().equals(auth.getUid())) {
+                        Log.d("currentUserId", auth.getUid());
+                    } else {
+                        addInList(user);
 
-//                    }
-
+                    }
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -85,6 +87,36 @@ public class ChatsFragment extends Fragment {
 
 
         return binding.getRoot();
+
+    }
+
+    @SuppressLint("Range")
+    public void addInList(User user) {
+        ContentResolver contentResolver = getActivity().getContentResolver();
+        Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+        Cursor cursor = contentResolver.query(uri, null, null, null, null);
+        Log.d("NumberofContactRecieved", Integer.toString(cursor.getCount()));
+        cursor.moveToFirst();
+
+        if (cursor.getCount() > 0) {
+
+            while (cursor.moveToNext()) {
+
+                @SuppressLint("Range") String number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
+
+                if (user.getPhoneNumber().equals(number) || ("+91" + user.getPhoneNumber()).equals(number)) {
+                    @SuppressLint("Range") String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                    user.setUserName(name);
+                    list.add(user);
+                    return;
+
+
+                }
+
+            }
+        }
+
 
     }
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.example.whatsappclone.Adapters.FragmentsAdapter;
 import com.example.whatsappclone.databinding.ActivityMainBinding;
@@ -26,6 +27,13 @@ public class MainActivity extends AppCompatActivity {
 
         binding.viewPager.setAdapter(new FragmentsAdapter(getSupportFragmentManager() ));
         binding.tab.setupWithViewPager(binding.viewPager);
+
+        binding.grpChatFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
     }
 }

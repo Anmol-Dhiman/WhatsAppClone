@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.whatsappclone.ChatsPage;
+import com.example.whatsappclone.chatSection.ChatsPage;
 import com.example.whatsappclone.R;
 import com.example.whatsappclone.model.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,7 +48,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         User user = list.get(position);
-        holder.userName.setText(user.getPhoneNumber());
+        holder.userName.setText(user.getUserName());
         holder.lastMessage.setText("temp");
         Picasso.get().load(user.getProfliePic()).placeholder(R.drawable.avatar).into(holder.proflieImg);
 
@@ -57,8 +57,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             public void onClick(View view) {
                 Intent intent = new Intent(context, ChatsPage.class);
                 intent.putExtra("userId", user.getUserId());
-                Log.d("theIdOfReceiver", "" + user.getUserId());
-                intent.putExtra("userName", user.getPhoneNumber());
+                intent.putExtra("userName", user.getUserName());
                 intent.putExtra("profilePic", user.getProfliePic());
                 context.startActivity(intent);
 

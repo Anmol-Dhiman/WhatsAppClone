@@ -1,7 +1,6 @@
-package com.example.whatsappclone;
+package com.example.whatsappclone.chatSection;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -11,8 +10,9 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.whatsappclone.Adapters.ChatAdapter;
+import com.example.whatsappclone.MainActivity;
+import com.example.whatsappclone.R;
 import com.example.whatsappclone.databinding.ActivityChatsPageBinding;
-import com.example.whatsappclone.databinding.ActivityOtpVerificationBinding;
 import com.example.whatsappclone.model.MessageModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

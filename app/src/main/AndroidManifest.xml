@@ -2,9 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.whatsappclone">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -14,31 +13,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhatsApp">
         <activity
-            android:name=".AboutSection"
+            android:name=".ChatAndGrpCreation"
             android:exported="false" />
         <activity
-            android:name=".ChatsPage"
+            android:name=".authenticatoin.AboutSection"
             android:exported="false" />
         <activity
-            android:name=".OtpVerification"
+            android:name=".chatSection.ChatsPage"
             android:exported="false" />
         <activity
-            android:name=".SignUp"
+            android:name=".authenticatoin.OtpVerification"
+            android:exported="false" />
+        <activity
+            android:name=".authenticatoin.SignUp"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".SplashActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true" />
 
     </application>
 

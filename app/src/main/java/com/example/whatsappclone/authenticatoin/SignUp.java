@@ -1,4 +1,4 @@
-package com.example.whatsappclone;
+package com.example.whatsappclone.authenticatoin;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,16 +9,15 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.whatsappclone.R;
 import com.example.whatsappclone.databinding.ActivitySignUpBinding;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.hbb20.CountryCodePicker;
 
 import java.util.concurrent.TimeUnit;
 
