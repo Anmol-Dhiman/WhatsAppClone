@@ -16,16 +16,16 @@
             android:name=".ChatAndGrpCreation"
             android:exported="false" />
         <activity
-            android:name=".authenticatoin.AboutSection"
+            android:name=".authentication.AboutSection"
             android:exported="false" />
         <activity
             android:name=".chatSection.ChatsPage"
             android:exported="false" />
         <activity
-            android:name=".authenticatoin.OtpVerification"
+            android:name=".authentication.OtpVerification"
             android:exported="false" />
         <activity
-            android:name=".authenticatoin.SignUp"
+            android:name=".authentication.SignUp"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -38,7 +38,7 @@
         </activity>
         <activity
             android:name=".SplashActivity"
-            android:exported="true" />
+            android:exported="true"/>
 
     </application>
 

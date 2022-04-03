@@ -2,7 +2,7 @@ package com.example.whatsappclone.model;
 
 public class User {
 
-    String profliePic, phoneNumber, about, userId,userName;
+    String profliePic, phoneNumber, about, userId, userName;
     String lastMessage;
 
     public String getUserName() {
@@ -13,10 +13,10 @@ public class User {
         this.userName = userName;
     }
 
-    public User(String phoneNumber, String about ) {
+    public User(String phoneNumber, String userName) {
 
         this.phoneNumber = phoneNumber;
-        this.about = about;
+        this.userName = userName;
     }
 
     public User(String profliePic, String phoneNumber, String about) {

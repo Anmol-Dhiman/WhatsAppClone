@@ -17,4 +17,6 @@
 
     <color name="lightgreen">#B2F8CD</color>
     <color name="aboutPhotoIcon">#BDBBBB</color>
+    <color name="selectedItemColor">#7FB4EA</color>
+
 </resources>

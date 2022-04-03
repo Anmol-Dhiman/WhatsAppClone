@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.whatsappclone.authenticatoin.SignUp;
+import com.example.whatsappclone.authentication.SignUp;
 
 public class SplashActivity extends AppCompatActivity {
 

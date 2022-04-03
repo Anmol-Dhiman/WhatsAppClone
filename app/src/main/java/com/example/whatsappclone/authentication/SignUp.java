@@ -1,4 +1,4 @@
-package com.example.whatsappclone.authenticatoin;
+package com.example.whatsappclone.authentication;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

@@ -2,6 +2,7 @@ package com.example.whatsappclone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,14 +24,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-
-        binding.viewPager.setAdapter(new FragmentsAdapter(getSupportFragmentManager() ));
+        binding.viewPager.setAdapter(new FragmentsAdapter(getSupportFragmentManager()));
         binding.tab.setupWithViewPager(binding.viewPager);
 
         binding.grpChatFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(MainActivity.this, ChatAndGrpCreation.class));
             }
         });
 

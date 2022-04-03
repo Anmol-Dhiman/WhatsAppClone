@@ -34,7 +34,7 @@ public class ChatsFragment extends Fragment {
     private ArrayList<User> list = new ArrayList<>();
     private FirebaseDatabase database;
     private FirebaseAuth auth;
-
+    private int CHAT_FRAGMENT = 1;
 
     public ChatsFragment() {
 
@@ -50,7 +50,7 @@ public class ChatsFragment extends Fragment {
         binding = FragmentChatsBinding.inflate(inflater, container, false);
         database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
-        UserAdapter adapter = new UserAdapter(list, getContext());
+        UserAdapter adapter = new UserAdapter(list, getContext(), CHAT_FRAGMENT);
         binding.chatRecyclerView.setAdapter(adapter);
         binding.chatRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

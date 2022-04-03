@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:backgroundTint="@color/black"
     android:scrollbarSize="18sp"
-    tools:context=".authenticatoin.SignUp">
+    tools:context=".authentication.SignUp">
 
     <com.hbb20.CountryCodePicker
         android:id="@+id/ccp"

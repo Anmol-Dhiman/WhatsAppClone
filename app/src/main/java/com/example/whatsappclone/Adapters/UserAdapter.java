@@ -1,8 +1,11 @@
 package com.example.whatsappclone.Adapters;
 
+import static android.graphics.Color.TRANSPARENT;
+
 import android.content.Context;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.whatsappclone.ChatAndGrpCreation;
 import com.example.whatsappclone.chatSection.ChatsPage;
 import com.example.whatsappclone.R;
 import com.example.whatsappclone.model.User;
@@ -27,14 +31,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 //    we have just build the recycler view over here
 //    which is used to show the contacts in the chats section
 
-    ArrayList<User> list;
-    Context context;
+    private ArrayList<User> list;
+    private Context context;
+    private int ACTIVITY_CODE;
+    private boolean isSelected = false;
+    private ArrayList<User> selected = new ArrayList<>();
 
-    FirebaseAuth auth = FirebaseAuth.getInstance();
-
-    public UserAdapter(ArrayList<User> list, Context context) {
+    public UserAdapter(ArrayList<User> list, Context context, int ACTIVITY_CODE) {
         this.list = list;
         this.context = context;
+        this.ACTIVITY_CODE = ACTIVITY_CODE;
+
     }
 
     @NonNull
@@ -49,18 +56,70 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         User user = list.get(position);
         holder.userName.setText(user.getUserName());
-        holder.lastMessage.setText("temp");
-        Picasso.get().load(user.getProfliePic()).placeholder(R.drawable.avatar).into(holder.proflieImg);
+        if (ACTIVITY_CODE == 2) {
+
+
+            if (user.getPhoneNumber() == null) {
+                holder.lastMessage.setVisibility(View.GONE);
+                holder.userName.setHeight(66);
+                holder.proflieImg.setImageResource(R.drawable.ic_baseline_group_24);
+
+            } else {
+                holder.lastMessage.setText(user.getAbout());
+                Picasso.get().load(user.getProfliePic()).placeholder(R.drawable.avatar).into(holder.proflieImg);
+            }
+
+        } else {
+            holder.lastMessage.setText("temp");
+            Picasso.get().load(user.getProfliePic()).placeholder(R.drawable.avatar).into(holder.proflieImg);
+        }
+
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                isSelected = true;
+                if (selected.contains(list.get(position))) {
+//                   this is for making the selected item unselect
+                    holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+                    selected.remove(list.get(position));
+                } else {
+//                    here we are selecting the item with the long press
+                    holder.itemView.setBackgroundResource(R.color.selectedItemColor);
+                    selected.add(list.get(position));
+                }
+                if (selected.size() == 0)
+                    isSelected = false;
+
+
+                return true;
+            }
+        });
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ChatsPage.class);
-                intent.putExtra("userId", user.getUserId());
-                intent.putExtra("userName", user.getUserName());
-                intent.putExtra("profilePic", user.getProfliePic());
-                context.startActivity(intent);
 
+
+                if (isSelected) {
+                    if (selected.contains(list.get(position))) {
+                        holder.itemView.setBackgroundColor(Color.TRANSPARENT);
+                        selected.remove(list.get(position));
+                    } else {
+                        holder.itemView.setBackgroundResource(R.color.selectedItemColor);
+                        selected.add(list.get(position));
+                    }
+                    if (selected.size() == 0)
+                        isSelected = false;
+                } else {
+
+                    Intent intent = new Intent(context, ChatsPage.class);
+                    intent.putExtra("userId", user.getUserId());
+                    intent.putExtra("userName", user.getUserName());
+                    intent.putExtra("profilePic", user.getProfliePic());
+                    context.startActivity(intent);
+                }
             }
         });
     }
